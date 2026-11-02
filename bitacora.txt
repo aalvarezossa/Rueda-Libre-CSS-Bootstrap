@@ -193,3 +193,24 @@ Se utilizó CSS Grid en estos apartados
 #Distribución del sitio con Flexbox.
 Fila del formulario - Encabezado - Pie de página
 Se utilizó flexbox en estos apartados, ya que solo se requería tener la información en una misma fila.
+
+MINIRETO: Comparación de CSS propio y Bootstrap 5.3
+
+Tiempo invertido: 35 minutos.
+
+Distribución:
+- Celular: una columna.
+- Desde sm: dos columnas.
+- Desde lg: tres columnas.
+- Desde xl: cuatro columnas.
+
+Comparación del código:
+- CSS propio: 45 líneas relacionadas con la flota.
+- Bootstrap: clases de grilla row, row-cols-1, row-cols-sm-2, row-cols-lg-3, row-cols-xl-4 y g-4.
+
+Ventajas de Bootstrap:
+Se consiguió una distribución responsive sin tener que escribir reglas CSS propias para las columnas ni para los espacios entre tarjetas.
+
+Desventajas:
+Se pierde parte del control directo sobre la distribución y los estilos visuales, ya que se depende de las clases y los valores predeterminados
+del framework.
