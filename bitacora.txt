@@ -214,3 +214,11 @@ Se consiguió una distribución responsive sin tener que escribir reglas CSS pro
 Desventajas:
 Se pierde parte del control directo sobre la distribución y los estilos visuales, ya que se depende de las clases y los valores predeterminados
 del framework.
+
+Cinco clases investigadas en la documentación:
+
+-py-5: agrega espaciado vertical mediante padding en la parte superior e inferior.
+-text-secondary: aplica el color secundario al texto.
+-flex-md-row: organiza los elementos horizontalmente a partir del breakpoint md.
+-d-none: oculta un elemento.
+-d-md-block: muestra un elemento como bloque a partir del breakpoint md.
