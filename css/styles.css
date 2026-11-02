@@ -3,28 +3,35 @@
    ========================================= */
 
 :root {
-    /* Colores de marca */
     --color-verde-ruta: #1E7A4F;
     --color-naranja-pedal: #F39A2B;
     --color-azul-noche: #14213D;
     --color-crema: #FAF6EF;
     --color-gris-asfalto: #5B6470;
 
-    /* Familias tipográficas */
     --fuente-titulos: "Montserrat", Arial, sans-serif;
     --fuente-texto: "Open Sans", Arial, sans-serif;
 
-    /* Escala de espaciado */
     --espaciado-pequeno: 0.5rem;
     --espaciado-medio: 1rem;
     --espaciado-grande: 2rem;
     --espaciado-extra-grande: 3rem;
+
+    /* Ancho máximo del contenido (se usa en main, header y footer) */
+    --ancho-maximo: 70rem;
 }
 
 *,
 *::before,
 *::after {
     box-sizing: border-box;
+}
+
+/* Ninguna imagen puede ser más ancha que su contenedor */
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
 }
 
 
@@ -38,12 +45,19 @@ body {
     background-color: var(--color-crema);
     margin: 0;
     padding-bottom: 6rem;
+    line-height: 1.5;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--fuente-titulos);
     color: var(--color-azul-noche);
+    line-height: 1.2;
 }
+
+/* Tamaños de título para móvil */
+h1 { font-size: 1.75rem; }
+h2 { font-size: 1.4rem; }
+h3 { font-size: 1.15rem; }
 
 .texto-secundario {
     color: var(--color-gris-asfalto);
@@ -55,17 +69,15 @@ a {
 
 main {
     width: 100%;
-    max-width: 70rem;
+    max-width: var(--ancho-maximo);
     margin: 0 auto;
     padding: var(--espaciado-medio);
 }
 
-/* Separación entre secciones (reemplaza los <br>) */
 main > section + section {
     margin-top: var(--espaciado-grande);
 }
 
-/* Grupo de botones en línea */
 .acciones {
     display: flex;
     flex-wrap: wrap;
@@ -75,26 +87,24 @@ main > section + section {
 
 
 /* =========================================
-3. ENCABEZADO Y NAVEGACIÓN
+3. ENCABEZADO Y NAVEGACIÓN (MÓVIL)
+   Nombre arriba, menú debajo, todo centrado
    ========================================= */
 
 header {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
+    gap: var(--espaciado-medio);
+    padding: var(--espaciado-medio);
+    text-align: center;
     background-color: var(--color-azul-noche);
     color: #FFFFFF;
-    padding: var(--espaciado-grande);
 }
 
 header h1,
 header h2,
-header h3,
-header h4,
-header h5,
-header h6 {
+header h3 {
     color: #FFFFFF;
 }
 
@@ -102,8 +112,10 @@ header a {
     color: #FFFFFF;
 }
 
-.marca {
-    flex: 0 1 auto;
+header a:hover,
+#menu a:focus {
+    background-color: var(--color-naranja-pedal);
+    color: var(--color-azul-noche);
 }
 
 .marca h1,
@@ -111,38 +123,29 @@ header a {
     margin-top: 0;
 }
 
-/* Menú de navegación */
 #menu {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
-    gap: 1rem;
+    gap: var(--espaciado-pequeno);
     list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-#menu li {
     margin: 0;
     padding: 0;
 }
 
 #menu a {
     display: block;
-    padding: 0.5rem 0.75rem;
+    padding: 0.75rem 1rem;
     color: #FFFFFF;
     text-decoration: none;
     border-radius: 0.3rem;
 }
 
-/* Página actual */
 #menu a.activo {
     color: var(--color-naranja-pedal);
     font-weight: 600;
 }
 
-/* Hover y foco: fondo naranja para que se note sobre el encabezado oscuro */
 #menu a:hover,
 #menu a:focus {
     background-color: var(--color-naranja-pedal);
@@ -156,11 +159,23 @@ header a {
 
 
 /* =========================================
-4. PORTADA E IMÁGENES
+4. PORTADA (MÓVIL: UNA COLUMNA)
    ========================================= */
 
+.portada-inicio {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--espaciado-grande);
+    padding: var(--espaciado-grande) 0;
+}
+
+.texto-portada {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .portada {
-    min-height: 20vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -168,15 +183,11 @@ header a {
     text-align: center;
 }
 
-/* Imagen de portada: ocupa todo su contenedor */
 .imagen-portada {
-    display: block;
     width: 100%;
-    height: auto;
     border-radius: 0.75rem;
 }
 
-/* Imágenes sueltas (bicicleta, ruta, logo): ancho limitado */
 .portada .imagen-portada {
     max-width: 30rem;
 }
@@ -189,7 +200,7 @@ header a {
 #servicios {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--espaciado-grande);
+    gap: var(--espaciado-medio);
 }
 
 #servicios h2 {
@@ -198,19 +209,11 @@ header a {
 }
 
 .tarjeta-servicio {
-    flex: 1 1 18rem;
+    flex: 1 1 16rem;
     padding: var(--espaciado-medio);
     border: 2px solid var(--color-gris-asfalto);
     border-radius: 0.75rem;
     background-color: #FFFFFF;
-}
-
-.tarjeta-servicio img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 0.5rem;
-    margin-bottom: var(--espaciado-medio);
 }
 
 .tarjeta-electrica {
@@ -232,46 +235,29 @@ header a {
 
 
 /* =========================================
-6. TARIFAS Y TABLAS
+6. TARIFAS Y TABLAS (MÓVIL: SIN SCROLL LATERAL)
    ========================================= */
 
 .contenedor-tabla {
     width: 100%;
-    max-width: 100%;
+    margin: var(--espaciado-medio) 0;
     overflow-x: auto;
-    margin: 1.5rem 0;
 }
 
 .contenedor-tabla table {
-    width: auto;
+    width: 100%;
     border-collapse: collapse;
-    margin: 0 auto;
-    background-color: white;
+    background-color: #FFFFFF;
 }
 
-.contenedor-tabla th,
-.contenedor-tabla td {
-    padding: 0.75rem;
-    border: 1px solid var(--color-gris-asfalto);
-    text-align: left;
-}
-
-.contenedor-tabla th {
-    background-color: var(--color-azul-noche);
-    color: white;
-}
-
-@media screen and (min-width: 768px) and (orientation: landscape), screen and (min-width: 1024px) {
-    .contenedor-tabla table {
-        width: 100%;
-    }
-}
-
+/* Letra y relleno reducidos para que quepan en 360px */
 th,
 td {
-    padding: var(--espaciado-pequeno);
+    padding: 0.35rem 0.3rem;
     border: 1px solid var(--color-gris-asfalto);
     text-align: left;
+    font-size: 0.8rem;
+    overflow-wrap: break-word;
 }
 
 thead th {
@@ -281,7 +267,7 @@ thead th {
 
 caption {
     caption-side: top;
-    padding: var(--espaciado-medio);
+    padding: var(--espaciado-pequeno);
     font-family: var(--fuente-titulos);
     font-weight: 600;
     color: var(--color-azul-noche);
@@ -298,10 +284,16 @@ form {
     margin: 0 auto;
 }
 
+/* Evita que el fieldset ensanche la página en móvil */
+fieldset {
+    min-width: 0;
+}
+
 input,
 select,
 textarea {
     font-family: var(--fuente-texto);
+    font-size: 1rem;
     color: var(--color-azul-noche);
     background-color: #FFFFFF;
     border: 1px solid var(--color-gris-asfalto);
@@ -310,24 +302,13 @@ textarea {
     max-width: 100%;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="number"],
-input[type="datetime-local"],
-select,
-textarea {
-    width: 100%;
-    max-width: 25rem;
-}
-
 input[type="checkbox"] {
     width: auto;
 }
 
 .grupo-formulario {
-    margin-bottom: var(--espaciado-grande);
-    padding: var(--espaciado-grande);
+    margin: 0 0 var(--espaciado-medio);
+    padding: var(--espaciado-medio);
     border: 1px solid var(--color-gris-asfalto);
     border-radius: 0.75rem;
     background-color: #FFFFFF;
@@ -352,7 +333,6 @@ input[type="checkbox"] {
 .grupo-formulario textarea {
     display: block;
     width: 100%;
-    max-width: 100%;
     margin-bottom: var(--espaciado-medio);
 }
 
@@ -364,9 +344,15 @@ textarea:focus {
     border-color: var(--color-verde-ruta);
 }
 
-.grupo-formulario button {
-    padding: var(--espaciado-medio) var(--espaciado-grande);
-    font-size: 1rem;
+.fila-campos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--espaciado-medio);
+}
+
+.fila-campos .campo {
+    flex: 1 1 12rem;
+    min-width: 0;
 }
 
 
@@ -378,7 +364,8 @@ button {
     background-color: var(--color-verde-ruta);
     color: #FFFFFF;
     font-family: var(--fuente-texto);
-    padding: var(--espaciado-pequeno) var(--espaciado-medio);
+    font-size: 1rem;
+    padding: var(--espaciado-medio) var(--espaciado-grande);
     border: none;
     border-radius: 0.3rem;
     cursor: pointer;
@@ -393,12 +380,11 @@ button {
     text-decoration: none;
 }
 
-/* Botón secundario */
 .boton-secundario {
     display: inline-block;
     background-color: var(--color-naranja-pedal);
     color: var(--color-azul-noche);
-    padding: var(--espaciado-pequeno) var(--espaciado-medio);
+    padding: 0.75rem var(--espaciado-medio);
     border-radius: 0.3rem;
     text-decoration: none;
 }
@@ -416,7 +402,6 @@ button {
     outline-offset: 3px;
 }
 
-/* Elementos destacados en naranja */
 .destacado {
     background-color: var(--color-naranja-pedal);
     color: var(--color-azul-noche);
@@ -424,7 +409,6 @@ button {
     border-radius: 0.3rem;
 }
 
-/* Botón principal de reserva */
 .boton-reservar {
     display: inline-block;
     background-color: var(--color-verde-ruta);
@@ -432,7 +416,7 @@ button {
     font-family: var(--fuente-texto);
     font-weight: 600;
     text-decoration: none;
-    padding: var(--espaciado-medio) var(--espaciado-grande);
+    padding: 0.85rem var(--espaciado-grande);
     border-radius: 0.3rem;
 }
 
@@ -450,7 +434,7 @@ button {
 
 
 /* =========================================
-9. ACCESO FIJO A WHATSAPP
+9. WHATSAPP FIJO
    ========================================= */
 
 .boton-whatsapp {
@@ -458,12 +442,10 @@ button {
     right: var(--espaciado-medio);
     bottom: var(--espaciado-medio);
     z-index: 1000;
-
     display: inline-block;
     padding: 0.85rem 1.2rem;
     border-radius: 999px;
-
-    background-color: var(--color-verde-ruta);
+    background-color: rgb(37, 211, 102);
     color: #FFFFFF;
     font-weight: 700;
     text-decoration: none;
@@ -477,61 +459,62 @@ button {
 }
 
 .boton-whatsapp:focus-visible {
-    outline: 3px solid var(--color-verde-ruta);
+    outline: 3px solid rgb(18, 140, 126);
     outline-offset: 3px;
 }
 
 
 /* =========================================
-10. PIE DE PÁGINA
+10. PIE DE PÁGINA (MÓVIL: UNA COLUMNA CENTRADA)
    ========================================= */
 
 footer {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 2rem;
-    padding: 2rem;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--espaciado-medio);
+    padding: var(--espaciado-grande) var(--espaciado-medio);
+    text-align: center;
     background-color: var(--color-azul-noche);
-    color: white;
+    color: #FFFFFF;
 }
 
 footer > div {
-    flex: 1 1 12rem;
+    width: 100%;
 }
 
 footer h3 {
     margin-top: 0;
-    color: white;
+    color: #FFFFFF;
 }
 
 footer p {
-    margin-bottom: 0.5rem;
+    margin: 0 0 var(--espaciado-pequeno);
 }
 
 footer a {
-    color: white;
+    color: #FFFFFF;
+    overflow-wrap: anywhere;
 }
 
 
 /* =========================================
-11. FLOTA DE BICICLETAS CON CSS GRID
+11. FLOTA Y RUTAS
    ========================================= */
 
+/* La flota se adapta sola (auto-fit): no necesita media query */
 .cuadricula-flota {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    justify-content: center;
-    gap: 2rem;
-    margin-top: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
+    gap: var(--espaciado-medio);
+    margin-top: var(--espaciado-medio);
 }
 
 .tarjeta-bicicleta {
     display: flex;
     flex-direction: column;
     min-width: 0;
-    padding: 1rem;
+    padding: var(--espaciado-medio);
     background-color: #FFFFFF;
     border: 1px solid var(--color-gris-asfalto);
     border-radius: 0.75rem;
@@ -546,10 +529,6 @@ footer a {
 
 .tarjeta-bicicleta h3 {
     margin-bottom: 0.5rem;
-}
-
-.tarjeta-bicicleta > p:not(.precio-bicicleta) {
-    line-height: 1.5;
 }
 
 .precio-bicicleta {
@@ -567,63 +546,22 @@ footer a {
 .tarjeta-bicicleta .boton-reservar {
     display: block;
     margin-top: auto;
-    padding: 0.75rem 1rem;
     text-align: center;
-    text-decoration: none;
     border-radius: 0.5rem;
-    background-color: var(--color-verde-ruta);
-    color: #FFFFFF;
 }
 
-.tarjeta-bicicleta .boton-reservar:hover {
-    background-color: var(--color-naranja-pedal);
-    color: var(--color-azul-noche);
-    outline: 1px solid var(--color-azul-noche);
-    outline-offset: 1px;
-}
-
-.tarjeta-bicicleta .boton-reservar:focus {
-    background-color: var(--color-naranja-pedal);
-    color: var(--color-azul-noche);
-    outline: 2px solid var(--color-azul-noche);
-    outline-offset: 2px;
-}
-
-
-/* =========================================
-12. PORTADA DE INICIO CON GRID
-   ========================================= */
-
-.portada-inicio {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 2rem;
-    padding: 3rem 0;
-}
-
-.texto-portada {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-
-/* =========================================
-13. GALERÍA DE RUTAS CON GRID
-   ========================================= */
-
+/* Galería de rutas (MÓVIL: una columna) */
 .galeria-rutas {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
+    grid-template-columns: 1fr;
+    gap: var(--espaciado-medio);
+    margin-top: var(--espaciado-medio);
 }
 
 .tarjeta-ruta {
     display: flex;
     flex-direction: column;
-    padding: 1rem;
+    padding: var(--espaciado-medio);
     background-color: #FFFFFF;
     border: 1px solid var(--color-gris-asfalto);
     border-radius: 0.75rem;
@@ -646,15 +584,14 @@ footer a {
 
 
 /* =========================================
-14. DISTRIBUCIÓN DE LA PÁGINA DE RESERVAS
+12. RESERVAS (MÓVIL: FORMULARIO Y CONTACTO APILADOS)
    ========================================= */
 
 .reserva-layout {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    align-items: start;
-    gap: 2rem;
-    margin-top: 2rem;
+    grid-template-columns: 1fr;
+    gap: var(--espaciado-grande);
+    margin-top: var(--espaciado-medio);
 }
 
 .reserva-formulario {
@@ -663,7 +600,7 @@ footer a {
 
 .reserva-contacto {
     min-width: 0;
-    padding: 1.5rem;
+    padding: var(--espaciado-medio);
     background-color: #FFFFFF;
     border: 1px solid var(--color-gris-asfalto);
     border-radius: 0.75rem;
@@ -674,35 +611,122 @@ footer a {
     margin-top: 0;
 }
 
+.reserva-contacto a {
+    overflow-wrap: anywhere;
+}
+
+
+/* =====================================================
+   PARTE 2 — MEDIA QUERIES (min-width)
+   ===================================================== */
 
 /* =========================================
-15. FILA DE CAMPOS DEL FORMULARIO CON FLEXBOX
+13. TABLET (desde 768px)
    ========================================= */
 
-.fila-campos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
+@media (min-width: 768px) {
 
-.fila-campos .campo {
-    flex: 1 1 200px;
-    min-width: 0;
-}
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.6rem; }
+    h3 { font-size: 1.25rem; }
 
-.fila-campos input {
-    width: 100%;
-}
+    main {
+        padding: var(--espaciado-grande);
+    }
 
+    /* Encabezado: se recupera la distribución en fila del MiniReto 1 */
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding: var(--espaciado-grande);
+        text-align: left;
+    }
 
-/* =========================================
-16. ADAPTACIÓN A PANTALLAS PEQUEÑAS
-   ========================================= */
+    #menu {
+        justify-content: flex-end;
+    }
 
-@media (max-width: 700px) {
-    .portada-inicio,
-    .galeria-rutas,
+    /* Portada en dos columnas */
+    .portada-inicio {
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        padding: var(--espaciado-extra-grande) 0;
+    }
+
+    /* Galería de rutas en tres columnas */
+    .galeria-rutas {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--espaciado-grande);
+    }
+
+    /* Reservas: formulario a la izquierda, contacto a la derecha */
     .reserva-layout {
-        grid-template-columns: 1fr;
+        grid-template-columns: 2fr 1fr;
+        align-items: start;
+    }
+
+    .grupo-formulario {
+        padding: var(--espaciado-grande);
+    }
+
+    .reserva-contacto {
+        padding: 1.5rem;
+    }
+
+    /* Pie en fila */
+    footer {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        padding: var(--espaciado-grande);
+        text-align: left;
+    }
+
+    footer > div {
+        flex: 1 1 12rem;
+        width: auto;
+    }
+
+    /* Tablas con más aire y letra normal */
+    th,
+    td {
+        padding: 0.75rem;
+        font-size: 1rem;
+    }
+}
+
+
+/* =========================================
+14. ESCRITORIO (desde 1200px)
+   ========================================= */
+
+@media (min-width: 1200px) {
+
+    h1 { font-size: 2.25rem; }
+    h2 { font-size: 1.9rem; }
+
+    /* Encabezado y pie alinean su contenido con el ancho de <main> */
+    header,
+    footer {
+        padding-inline: max(var(--espaciado-grande), calc((100% - var(--ancho-maximo)) / 2));
+    }
+
+    .portada-inicio {
+        gap: 4rem;
+        padding: 4rem 0;
+    }
+
+    .texto-portada h2 {
+        font-size: 2.5rem;
+    }
+
+    .galeria-rutas {
+        gap: 2.5rem;
+    }
+
+    .reserva-layout {
+        gap: 3rem;
     }
 }
