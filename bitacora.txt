@@ -222,3 +222,9 @@ Cinco clases investigadas en la documentación:
 -flex-md-row: organiza los elementos horizontalmente a partir del breakpoint md.
 -d-none: oculta un elemento.
 -d-md-block: muestra un elemento como bloque a partir del breakpoint md.
+
+#MIGRACIÓN A BOOTSTRAP 5.3
+MiniReto: Implementación de Bootstrap en las páginas de tarifas y reservas
+Se crearon dos nuevas páginas HTML: tarifas-bootstrap.html y reservas-bootstrap.html, utilizando Bootstrap 5.3.
+Se decidió conservar las páginas originales (tarifas.html y reservas.html) sin modificaciones, siguiendo la recomendación del
+instructor de no alterar el trabajo previamente desarrollado con CSS personalizado.
